@@ -1,0 +1,27 @@
+{
+  "name": "bb-node-performance",
+  "version": "1.0.0",
+  "description": "BrownBag about node.js performance",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:measure": "node measure",
+    "start:cluster": "node cluster"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dolezel/bb-node-performance.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dolezel/bb-node-performance/issues"
+  },
+  "homepage": "https://github.com/dolezel/bb-node-performance#readme",
+  "dependencies": {
+    "koa": "^2.5.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
