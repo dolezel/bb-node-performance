@@ -37,3 +37,13 @@ npm run start:cluster simple
 # sudo apt install apache2-utils
 ab -c 10 -n 10 http://localhost:3000/
 ```
+
+### Workers
+
+```bash
+npm i webworker-threads
+```
+
+```bash
+npm run start:cluster simple
+```

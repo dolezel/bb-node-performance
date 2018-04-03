@@ -63,5 +63,5 @@ if (cluster.isMaster) {
     cluster.fork();
   }
 } else {
-  startWeb(cluster.worker, doWork);
+  startWeb(doWork, cluster.worker);
 }
