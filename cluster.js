@@ -2,21 +2,17 @@ const os = require('os');
 const cluster = require('cluster');
 const startWeb = require('./server');
 const {
+  getConfig,
   block,
   hash,
   read,
-  request
+  requestDns,
+  requestIP
 } = require('./utils');
 
 const cpus = os.cpus().length;
 
-const variant = process.argv[2];
-if (!variant) {
-  console.error('You need to specify variant');
-  process.exit(1);
-}
-
-const config = {
+const config = getConfig({
   'simple': {
     // UV_THREADPOOL_SIZE: 1,
     clusters: 1,
@@ -43,11 +39,7 @@ const config = {
     clusters: cpus * 2,
     doWork: hash,
   }
-}[variant];
-if (!config) {
-  console.error('Invalid variant');
-  process.exit(1);
-}
+});
 
 const { UV_THREADPOOL_SIZE, clusters, doWork } = config;
 

@@ -1,21 +1,17 @@
 const os = require('os');
 const {
+  getConfig,
   log,
   hash,
   read,
-  request,
+  requestDns,
+  requestIP
 } = require('./utils');
 
 const cpus = os.cpus().length;
 const DEFAULT_THREADPOOL_SIZE = 4;
 
-const variant = process.argv[2];
-if (!variant) {
-  console.error('You need to specify variant');
-  process.exit(1);
-}
-
-const config = {
+const config = getConfig({
   'simple': {
     // UV_THREADPOOL_SIZE: 4,
     work: [hash],
@@ -50,13 +46,9 @@ const config = {
   },
   quiz: {
     // UV_THREADPOOL_SIZE: 4,
-    work: [request, read, ...Array(DEFAULT_THREADPOOL_SIZE).fill(hash)],
+    work: [read, ...Array(DEFAULT_THREADPOOL_SIZE).fill(hash), requestDns, requestIP],
   }
-}[variant];
-if (!config) {
-  console.error('Invalid variant');
-  process.exit(1);
-}
+});
 
 const { UV_THREADPOOL_SIZE, work } = config;
 

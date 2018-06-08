@@ -2,6 +2,7 @@ const { promisify } = require('util');
 const crypto = require('crypto');
 const fs = require('fs');
 const https = require('https');
+const http = require('http');
 
 const pbkdf2 = promisify(crypto.pbkdf2);
 const readFile = promisify(fs.readFile);
@@ -25,7 +26,7 @@ function read(fileName = './package.json') {
   return readFile(fileName, 'utf8');
 }
 
-function request(url = 'https://www.google.com/') {
+function requestDns(url = 'https://www.google.com/') {
   return new Promise((resolve, reject) =>
     https
       .request(url, res => {
@@ -38,10 +39,35 @@ function request(url = 'https://www.google.com/') {
   );
 }
 
+function requestIP(url = 'http://172.217.23.206/') {
+  return new Promise((resolve, reject) =>
+    http
+      .request(url, res => {
+          res.on('data', () => null);
+          res.on('end', resolve);
+        }
+      )
+      .on('error', reject)
+      .end()
+  );
+}
+
+function getConfig(alternatives) {
+  const variant = process.argv[2];
+  const config = alternatives[variant];
+  if (!config) {
+    console.error('You need to specify one of variants:', Object.keys(alternatives).join(', '));
+    process.exit(1);
+  }
+  return config;
+}
+
 module.exports = {
+  getConfig,
   log,
   block,
   hash,
   read,
-  request,
+  requestDns,
+  requestIP
 };

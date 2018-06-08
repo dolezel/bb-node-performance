@@ -1,11 +1,6 @@
 const wwt = require('webworker-threads');
 const startWeb = require('./server');
-
-const variant = process.argv[2];
-if (!variant) {
-  console.error('You need to specify variant');
-  process.exit(1);
-}
+const { getConfig } = require('./utils');
 
 const Worker = wwt.Worker;
 
@@ -52,14 +47,10 @@ function doWorkEval() {
   });
 }
 
-const config = {
+const config = getConfig({
   'eval': doWorkEval,
   'worker': doWorkWorker,
-}[variant];
-if (!config) {
-  console.error('Invalid variant');
-  process.exit(1);
-}
+});
 
 setInterval(() => null, 100); // to invoke Promise processing
 
