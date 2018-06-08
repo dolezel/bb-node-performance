@@ -14,16 +14,28 @@ See [event loop](https://docs.google.com/presentation/d/1ghQLMrpuE0rm5H0qJ3naOCE
 ## Node internals
 
 Example:
-* https://github.com/nodejs/node/blob/master/lib/internal/crypto/pbkdf2.js
-* https://github.com/nodejs/node/blob/master/src/node_crypto.cc#L4967
+* https://github.com/nodejs/node/blob/v10.x/lib/internal/crypto/pbkdf2.js
+* https://github.com/nodejs/node/blob/v10.x/src/node_crypto.cc#L4635
 
 It looks like [C++ Addons](https://docs.google.com/presentation/d/1MeefJ3TxcyO9zBfOUmUY5qWx78qVaSU2jdayl0rtz4E/) :astonished:
+
+### Little offtopic - new promise API
+
+* https://github.com/nodejs/node/blob/v10.x/lib/internal/fs/promises.js
 
 ## Time for code
 
 ### Threads
 
 ```bash
+npm run start:measure simple
+npm run start:measure single
+npm run start:measure queue
+npm run start:measure pool
+npm run start:measure pool+1
+npm run start:measure 2*pool
+npm run start:measure cpus
+npm run start:measure cpus-2
 npm run start:measure quiz
 ```
 
@@ -31,6 +43,10 @@ npm run start:measure quiz
 
 ```bash
 npm run start:cluster simple
+npm run start:cluster single
+npm run start:cluster cluster
+npm run start:cluster cpus
+npm run start:cluster 2*cpus
 ```
 
 ```bash
@@ -45,5 +61,6 @@ npm i webworker-threads
 ```
 
 ```bash
-npm run start:cluster simple
+npm run start:workers eval
+npm run start:workers worker
 ```
