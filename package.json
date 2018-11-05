@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:measure": "node measure",
     "start:cluster": "node cluster",
-    "start:workers": "node workers"
+    "start:workers": "node --experimental-worker workers"
   },
   "repository": {
     "type": "git",
@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/dolezel/bb-node-performance#readme",
   "dependencies": {
-    "koa": "^2.5.0",
-    "webworker-threads": "^0.7.13"
+    "koa": "^2.6.0",
+    "webworker-threads": "0.7.17"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": "10.13.0"
   }
 }

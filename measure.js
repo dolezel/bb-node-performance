@@ -1,4 +1,4 @@
-const os = require('os');
+const os = require("os");
 const {
   getConfig,
   log,
@@ -6,47 +6,52 @@ const {
   read,
   requestDns,
   requestIP
-} = require('./utils');
+} = require("./utils");
 
 const cpus = os.cpus().length;
 const DEFAULT_THREADPOOL_SIZE = 4;
 
 const config = getConfig({
-  'simple': {
+  simple: {
     // UV_THREADPOOL_SIZE: 4,
-    work: [hash],
+    work: [hash]
   },
-  'single': {
+  single: {
     UV_THREADPOOL_SIZE: 1,
-    work: [hash],
+    work: [hash]
   },
-  'queue': {
+  queue: {
     UV_THREADPOOL_SIZE: 1,
-    work: [hash, hash],
+    work: [hash, hash]
   },
-  'pool': {
+  pool: {
     // UV_THREADPOOL_SIZE: 4,
-    work: Array(DEFAULT_THREADPOOL_SIZE).fill(hash),
+    work: Array(DEFAULT_THREADPOOL_SIZE).fill(hash)
   },
-  'pool+1': {
+  "pool+1": {
     // UV_THREADPOOL_SIZE: 1,
-    work: Array(DEFAULT_THREADPOOL_SIZE + 1).fill(hash),
+    work: Array(DEFAULT_THREADPOOL_SIZE + 1).fill(hash)
   },
-  '2*pool': {
+  "2*pool": {
     // UV_THREADPOOL_SIZE: 4,
-    work: Array(DEFAULT_THREADPOOL_SIZE * 2).fill(hash),
+    work: Array(DEFAULT_THREADPOOL_SIZE * 2).fill(hash)
   },
-  'cpus': {
+  cpus: {
     UV_THREADPOOL_SIZE: cpus,
-    work: Array(cpus).fill(hash),
+    work: Array(cpus).fill(hash)
   },
-  'cpus-2': {
+  "cpus-2": {
     UV_THREADPOOL_SIZE: cpus - 2,
-    work: Array(cpus - 2).fill(hash),
+    work: Array(cpus - 2).fill(hash)
   },
   quiz: {
     // UV_THREADPOOL_SIZE: 4,
-    work: [read, ...Array(DEFAULT_THREADPOOL_SIZE).fill(hash), requestDns, requestIP],
+    work: [
+      read,
+      ...Array(DEFAULT_THREADPOOL_SIZE).fill(hash),
+      requestDns,
+      requestIP
+    ]
   }
 });
 
@@ -57,7 +62,10 @@ if (UV_THREADPOOL_SIZE) {
 }
 
 console.log(`CPUs: ${cpus}`);
-console.log(`UV_THREADPOOL_SIZE: ${process.env.UV_THREADPOOL_SIZE || DEFAULT_THREADPOOL_SIZE}`);
+console.log(
+  `UV_THREADPOOL_SIZE: ${process.env.UV_THREADPOOL_SIZE ||
+    DEFAULT_THREADPOOL_SIZE}`
+);
 
 for (let i = 0; i < work.length; i++) {
   log(work[i]);

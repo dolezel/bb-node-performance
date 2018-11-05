@@ -1,6 +1,6 @@
-const os = require('os');
-const cluster = require('cluster');
-const startWeb = require('./server');
+const os = require("os");
+const cluster = require("cluster");
+const startWeb = require("./server");
 const {
   getConfig,
   block,
@@ -8,36 +8,41 @@ const {
   read,
   requestDns,
   requestIP
-} = require('./utils');
+} = require("./utils");
 
 const cpus = os.cpus().length;
 
 const config = getConfig({
-  'simple': {
+  simple: {
     // UV_THREADPOOL_SIZE: 1,
     clusters: 1,
-    doWork: block,
+    doWork: block
   },
-  'single': {
+  single: {
     UV_THREADPOOL_SIZE: 1,
     clusters: 1,
-    doWork: block,
+    doWork: block
   },
-  'cluster': {
+  cluster: {
     UV_THREADPOOL_SIZE: 1,
     clusters: 4,
-    doWork: block,
+    doWork: block
   },
 
-  'cpus': {
+  cpus: {
     UV_THREADPOOL_SIZE: 1,
     clusters: cpus,
-    doWork: hash,
+    doWork: hash
   },
-  '2*cpus': {
+  "cpus-2": {
+    UV_THREADPOOL_SIZE: 1,
+    clusters: cpus - 2,
+    doWork: hash
+  },
+  "2*cpus": {
     UV_THREADPOOL_SIZE: 1,
     clusters: cpus * 2,
-    doWork: hash,
+    doWork: hash
   }
 });
 
