@@ -16,7 +16,7 @@ See [event loop](https://docs.google.com/presentation/d/1ghQLMrpuE0rm5H0qJ3naOCE
 Example:
 
 - https://github.com/nodejs/node/blob/v10.x/lib/internal/crypto/pbkdf2.js
-- https://github.com/nodejs/node/blob/v10.x/src/node_crypto.cc#L4635
+- https://github.com/nodejs/node/blob/v10.x/src/node_crypto.cc#L4706
 
 It looks like [C++ Addons](https://docs.google.com/presentation/d/1MeefJ3TxcyO9zBfOUmUY5qWx78qVaSU2jdayl0rtz4E/) :astonished:
 
