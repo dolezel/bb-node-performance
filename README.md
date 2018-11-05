@@ -2,7 +2,7 @@
 
 BrownBag about node.js performance
 
-- [libuv](https://en.wikipedia.org/wiki/Libuv) + [v8](https://developers.google.com/v8/) + sauce = node.js
+- [libuv](http://libuv.org/) + [v8](https://developers.google.com/v8/) + sauce = node.js
 - see [https://github.com/nodejs/node](https://github.com/nodejs/node)
 
 ## Single threaded ?!
@@ -64,5 +64,5 @@ npm i webworker-threads
 ```bash
 npm run start:workers eval
 npm run start:workers worker
-npm run start:workers native
+npm run start:workers native # requires --experimental-worker flag
 ```

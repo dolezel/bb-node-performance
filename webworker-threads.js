@@ -3,7 +3,7 @@ const { loop } = require("./utils");
 
 const Worker = wwt.Worker;
 
-function doWorkWorker() {
+function worker() {
   return new Promise(resolve => {
     const worker = new Worker(function() {
       this.onmessage = function(event) {
@@ -22,7 +22,7 @@ function doWorkWorker() {
   });
 }
 
-function doWorkEval() {
+function eval() {
   return new Promise((resolve, reject) => {
     const t = wwt.create();
     t.eval(loop.toString());
@@ -40,6 +40,6 @@ function doWorkEval() {
 setInterval(() => null, 100); // to invoke Promise processing
 
 module.exports = {
-  doWorkWorker,
-  doWorkEval
+  worker,
+  eval
 };
